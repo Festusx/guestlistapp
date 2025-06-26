@@ -1,5 +1,5 @@
 body {
-  font-family: "Barrio", system-ui;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
   background-image: url('images/fbc2d128-1796-4d83-a6d4-78d1b0d13f09.JPG');
@@ -40,7 +40,7 @@ button {
   background: rgb(168, 23, 163);
   border: none;
   color: rgb(8, 7, 7);
-  font-family: "Barrio", system-ui;
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
   cursor: pointer;
 
@@ -52,7 +52,7 @@ button {
 
 ::placeholder {
     color: #ffffff;
-    font-family: "Barrio", system-ui;
+    font-family: "Roboto", sans-serif;
 }
 
 ul {
