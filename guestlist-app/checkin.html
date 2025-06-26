@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
   <title>Guest Check-In</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,6 +53,7 @@
       background: #222;
       border-radius: 8px;
       padding: 10px;
+      box-sizing: border-box; 
     }
 
     ul#guest-list {
@@ -68,6 +70,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap; 
     }
 
     .blurred {
@@ -82,12 +85,31 @@
       padding: 6px 12px;
       border-radius: 4px;
       cursor: pointer;
+      flex-shrink: 0; /* Prevent button from shrinking too small */
+      margin-top: 8px; /* Added for spacing on small devices */
     }
 
     button:disabled {
       background: gray;
       cursor: not-allowed;
     }
+
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      #guest-container {
+        max-width: 90%;
+      }
+      li {
+        font-size: 16px;
+        flex-wrap: nowrap;
+      }
+      button {
+        margin-left: 10px;
+        width: auto;
+      }
+    }
+
+
   </style>
 </head>
 <body>
