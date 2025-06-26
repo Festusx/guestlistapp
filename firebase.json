@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "guestlistapp",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
