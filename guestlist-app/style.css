@@ -7,7 +7,7 @@ body {
   background-repeat: no-repeat;            /* Prevent tiling/repeating */
   background-size: cover;                  /* Make it fill the screen proportionally */
   background-attachment: fixed;            
-  color: #ad269b;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   padding-top: 50px;
@@ -51,7 +51,7 @@ button {
 }
 
 ::placeholder {
-    color: #ad269b;
+    color: #ffffff;
     font-family: "Barrio", system-ui;
 }
 
