@@ -2,7 +2,7 @@ body {
   font-family: "Barrio", system-ui;
   font-weight: 400;
   font-style: normal;
-  background-image: url(/guestlist-app/images/fbc2d128-1796-4d83-a6d4-78d1b0d13f09.JPG);
+  background-image: url('images/fbc2d128-1796-4d83-a6d4-78d1b0d13f09.JPG');
   background-position: center center;      /* Center horizontally and vertically */
   background-repeat: no-repeat;            /* Prevent tiling/repeating */
   background-size: cover;                  /* Make it fill the screen proportionally */
