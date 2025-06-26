@@ -16,10 +16,32 @@
         <img src="logo.png">
     </div>
     <h1>CODED Guest List</h1>
-    <form id="guest-form">
+    
+    <!-- <form id="guest-form">
       <input type="text" id="guest-name" placeholder="Enter guest name..." required>
-      <button type="submit">Add Guest</button>
-    </form>
+
+      <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+        <button type="button" id="add-vip">Add to VIP</button>
+        <button type="button" id="add-regular">Add to Regular</button>
+      </div>
+
+    </form> -->
+    
+    <form id="guest-form" style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+  <input
+    type="text"
+    id="guest-name"
+    placeholder="Enter guest name..."
+    required
+    style="width: 100%; max-width: 400px; padding: 10px; font-size: 16px;"
+  />
+  <div style="display: flex; gap: 10px; justify-content: center; width: 100%; max-width: 400px;">
+    <button type="button" id="add-vip" style="flex: 1; padding: 10px;">Add to VIP</button>
+    <button type="button" id="add-regular" style="flex: 1; padding: 10px;">Add to Regular</button>
+  </div>
+</form>
+
+    
     <ul id="guest-list"></ul>
   </div>
 

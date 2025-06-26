@@ -1,6 +1,4 @@
 
-// // checkin.js
-
 // import { db } from './firebase-config.js';
 // import {
 //   collection,
@@ -12,29 +10,44 @@
 // const guestList = document.getElementById('guest-list');
 // const guestsRef = collection(db, 'guests');
 
-// // ✅ Fix: use snapshot.docs.forEach to access the index
+// // ✅ New: Grab the search input element
+// const searchInput = document.getElementById('search-input');
+
+// let allGuests = []; // ✅ Store all guests locally for filtering
+
+// // Listen to Firestore changes and update list
 // onSnapshot(guestsRef, (snapshot) => {
+//   allGuests = []; // Clear previous data
+
+//   snapshot.forEach(docSnap => {
+//     const guest = { id: docSnap.id, ...docSnap.data() };
+//     allGuests.push(guest);
+//   });
+
+//   // ✅ Sort alphabetically by name
+//   allGuests.sort((a, b) => a.name.localeCompare(b.name));
+
+//   renderGuestList(allGuests);
+// });
+
+// // ✅ New: Render function to display guests filtered by search
+// function renderGuestList(guests) {
 //   guestList.innerHTML = '';
 
-//   snapshot.docs.forEach((docSnap, index) => {  // ✅ CHANGED this line
-//     const guest = docSnap.data();
+//   guests.forEach((guest, index) => {
 //     const li = document.createElement('li');
-
-//     // ✅ Use index for numbering
 //     li.textContent = `${index + 1}. ${guest.name}`;
 
-//     // Blur if checked in
 //     if (guest.checkedIn) {
 //       li.classList.add('blurred');
 //     }
 
-//     // Check-in button
 //     const checkInBtn = document.createElement('button');
 //     checkInBtn.textContent = guest.checkedIn ? 'Checked In' : 'Check In';
 //     checkInBtn.disabled = guest.checkedIn;
 
 //     checkInBtn.onclick = async () => {
-//       await updateDoc(doc(db, 'guests', docSnap.id), {
+//       await updateDoc(doc(db, 'guests', guest.id), {
 //         checkedIn: true
 //       });
 //     };
@@ -42,6 +55,17 @@
 //     li.appendChild(checkInBtn);
 //     guestList.appendChild(li);
 //   });
+// }
+
+// // ✅ New: Listen for input on the search box to filter the displayed list
+// searchInput.addEventListener('input', () => {
+//   const query = searchInput.value.toLowerCase().trim();
+
+//   const filteredGuests = allGuests.filter(guest => 
+//     guest.name.toLowerCase().includes(query)
+//   );
+
+//   renderGuestList(filteredGuests);
 // });
 
 
@@ -56,32 +80,42 @@ import {
   updateDoc
 } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-const guestList = document.getElementById('guest-list');
-const guestsRef = collection(db, 'guests');
-
-// ✅ New: Grab the search input element
+// 🔻 Get DOM elements
+const vipList = document.getElementById('vip-list');
+const regularList = document.getElementById('regular-list');
 const searchInput = document.getElementById('search-input');
 
-let allGuests = []; // ✅ Store all guests locally for filtering
+const guestsRef = collection(db, 'guests');
+let allGuests = []; // Store guests for filtering
 
-// Listen to Firestore changes and update list
+// 🔁 Realtime listener
 onSnapshot(guestsRef, (snapshot) => {
-  allGuests = []; // Clear previous data
+  allGuests = [];
 
   snapshot.forEach(docSnap => {
     const guest = { id: docSnap.id, ...docSnap.data() };
     allGuests.push(guest);
   });
 
-  // ✅ Sort alphabetically by name
+  // Sort alphabetically
   allGuests.sort((a, b) => a.name.localeCompare(b.name));
 
   renderGuestList(allGuests);
 });
 
-// ✅ New: Render function to display guests filtered by search
+// 🔍 Filter guests by search
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase().trim();
+  const filtered = allGuests.filter(guest =>
+    guest.name.toLowerCase().includes(query)
+  );
+  renderGuestList(filtered);
+});
+
+// ✅ Display guests into respective categories
 function renderGuestList(guests) {
-  guestList.innerHTML = '';
+  vipList.innerHTML = '';
+  regularList.innerHTML = '';
 
   guests.forEach((guest, index) => {
     const li = document.createElement('li');
@@ -102,17 +136,11 @@ function renderGuestList(guests) {
     };
 
     li.appendChild(checkInBtn);
-    guestList.appendChild(li);
+
+    if (guest.type === 'VIP') {
+      vipList.appendChild(li);
+    } else {
+      regularList.appendChild(li);
+    }
   });
 }
-
-// ✅ New: Listen for input on the search box to filter the displayed list
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase().trim();
-
-  const filteredGuests = allGuests.filter(guest => 
-    guest.name.toLowerCase().includes(query)
-  );
-
-  renderGuestList(filteredGuests);
-});

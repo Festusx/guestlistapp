@@ -30,6 +30,13 @@
       
     }
 
+    h2 {
+      color: #ffdddd;
+      margin-top: 20px;
+      font-family: "Barrio", system-ui;
+}
+
+
     .image-container {
   width: 150px;
   margin: 0 auto; /* Center horizontally */
@@ -145,8 +152,15 @@
 
   <!-- ✅ Add container div -->
   <div id="guest-container">
-    <ul id="guest-list"></ul>
-  </div>
+  <h2>VIP Guests</h2>
+  <ul id="vip-list"></ul>
+
+  <h2>Regular Guests</h2>
+  <ul id="regular-list"></ul>
+</div>
+
+<ul id="guest-list"></ul>
+
 
   <script type="module" src="./checkin.js"></script>
 </body>
